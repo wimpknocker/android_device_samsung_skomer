@@ -16,4 +16,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/skomer.mk
+    $(LOCAL_DIR)/vanir_skomer.mk

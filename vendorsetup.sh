@@ -1,2 +1,2 @@
-add_lunch_combo cm_skomer-eng
-add_lunch_combo cm_skomer-userdebug
+add_lunch_combo vanir_skomer-eng
+add_lunch_combo vanir_skomer-userdebug
