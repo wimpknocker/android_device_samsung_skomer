@@ -352,14 +352,17 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
     protected RILRequest findAndRemoveRequestFromList(int serial) {
         long removalTime = System.currentTimeMillis();
         long timeDiff = 0;
-        RILRequest rr = null;
 
         synchronized (mRequestList) {
+          Iterator<RILRequest> itr = mRequestList.iterator();
 
-		rr = mRequestList.get(serial);
+            while ( itr.hasNext() ) {
+                RILRequest rr = itr.next();
 
-                if (rr != null) {
-					mRequestList.remove(serial);
+                if (rr.mSerial == serial) {
+                    itr.remove();
+                    if (mRequestMessagesWaiting > 0)
+                        mRequestMessagesWaiting--;
                     return rr;
                 }
                 else
@@ -393,11 +396,12 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
                     }
                 }
             }
+        }
         return null;
     }
 
     @Override
-    protected RILRequest processSolicited (Parcel p) {
+    protected void processSolicited (Parcel p) {
     int serial, error;
     boolean found = false;
 
@@ -411,7 +415,7 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
     if (rr == null) {
         Rlog.w(RILJ_LOG_TAG, "Unexpected solicited response! sn: "
                         + serial + " error: " + error);
-            return null;
+            return;
     }
 
     Object ret = null;
@@ -427,7 +431,7 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             case RIL_REQUEST_ENTER_SIM_PUK2: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN2: ret =  responseInts(p); break;
-            case RIL_REQUEST_ENTER_NETWORK_DEPERSONALIZATION: ret =  responseInts(p); break;
+            case RIL_REQUEST_ENTER_DEPERSONALIZATION_CODE: ret =  responseInts(p); break;
             case RIL_REQUEST_GET_CURRENT_CALLS: ret =  responseCallList(p); break;
             case RIL_REQUEST_DIAL: ret =  responseVoid(p); break;
             case RIL_REQUEST_GET_IMSI: ret =  responseString(p); break;
@@ -543,7 +547,8 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
                     AsyncResult.forMessage(rr.mResult, null, tr);
                     rr.mResult.sendToTarget();
                 }
-                return rr;
+                rr.release();
+                return;
             }
         }
 
@@ -552,7 +557,8 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             if(!(error == -1 && rr.mRequest == RIL_REQUEST_SEND_SMS))
             {
                 rr.onError(error, ret);
-                return rr;
+                rr.release();
+                return;
             } else {
                 try
                 {
@@ -562,7 +568,8 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
                             + requestToString(rr.mRequest)
                             + " exception, Processing Samsung SMS fix ", tr);
                     rr.onError(error, ret);
-                    return rr;
+                    rr.release();
+                    return;
                 }
             }
         }
@@ -575,8 +582,8 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             rr.mResult.sendToTarget();
         }
 
-	return rr;
-   }
+        rr.release();
+    }
 
     @Override
     public void
