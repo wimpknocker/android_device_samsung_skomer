@@ -119,6 +119,7 @@ BOARD_LPM_BOOT_ARGUMENT_VALUE := 1
 # Recovery
 BOARD_UMS_LUNFILE := "/sys/devices/platform/musb-ux500.0/musb-hdrc/gadget/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/musb-ux500.0/musb-hdrc/gadget/lun%d/file"
+RECOVERY_VARIANT := twrp
 
 
 # TWRP flags
