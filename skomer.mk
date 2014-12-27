@@ -40,7 +40,7 @@ PRODUCT_COPY_FILES += \
 # Recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/init.recovery.samsungskomer.rc:root/init.recovery.samsungskomer.rc \
-    $(LOCAL_PATH)/recovery/root/etc/extra.fstab:recovery/root/etc/extra.fstab
+    $(LOCAL_PATH)/recovery/root/etc/extra.fstab:recovery/root/etc/extra.fstab \
     $(LOCAL_PATH)/recovery/lib/modules/j4fs.ko:recovery/root/lib/modules/j4fs.ko \
     $(LOCAL_PATH)/recovery/lib/modules/param.ko:recovery/root/lib/modules/param.ko
 
