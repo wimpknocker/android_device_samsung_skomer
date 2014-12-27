@@ -31,7 +31,7 @@ $(call inherit-product, vendor/samsung/skomer/skomer-vendor.mk)
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.samsungskomer.rc:root/init.samsungskomer.rc \
-    $(LOCAL_PATH)/root/init.environ.rc:root/init.environ.rc \
+    $(LOCAL_PATH)/rootdir/init.environ.rc:root/init.environ.rc \
     $(LOCAL_PATH)/rootdir/ueventd.samsungskomer.rc:root/ueventd.samsungskomer.rc \
     $(LOCAL_PATH)/rootdir/init.samsungskomer.usb.rc:root/init.samsungskomer.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.samsungskomer:root/fstab.samsungskomer \
