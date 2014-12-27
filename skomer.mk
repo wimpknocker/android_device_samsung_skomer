@@ -31,6 +31,7 @@ $(call inherit-product, vendor/samsung/skomer/skomer-vendor.mk)
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.samsungskomer.rc:root/init.samsungskomer.rc \
+    $(LOCAL_PATH)/root/init.environ.rc:root/init.environ.rc \
     $(LOCAL_PATH)/rootdir/ueventd.samsungskomer.rc:root/ueventd.samsungskomer.rc \
     $(LOCAL_PATH)/rootdir/init.samsungskomer.usb.rc:root/init.samsungskomer.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.samsungskomer:root/fstab.samsungskomer \
@@ -38,9 +39,23 @@ PRODUCT_COPY_FILES += \
 
 # Recovery
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/init.recovery.samsungskomer.rc:root/init.recovery.samsungskomer.rc \
+    $(LOCAL_PATH)/recovery/root/init.recovery.samsungskomer.rc:root/init.recovery.samsungskomer.rc \
+    $(LOCAL_PATH)/recovery/root/etc/extra.fstab:recovery/root/etc/extra.fstab
     $(LOCAL_PATH)/recovery/lib/modules/j4fs.ko:recovery/root/lib/modules/j4fs.ko \
     $(LOCAL_PATH)/recovery/lib/modules/param.ko:recovery/root/lib/modules/param.ko
+
+# Dual-Boot PhilZ Touch Recovery files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/res/misc/bootmenu.zip:recovery/root/res/misc/bootmenu.zip \
+    $(LOCAL_PATH)/recovery/root/res/misc/tool.zip:recovery/root/res/misc/tool.zip \
+    $(LOCAL_PATH)/recovery/root/res/misc/env.sh:recovery/root/res/misc/env.sh \
+    $(LOCAL_PATH)/recovery/root/res/misc/mount:recovery/root/res/misc/mount \
+    $(LOCAL_PATH)/recovery/root/res/misc/mount.2:recovery/root/res/misc/mount.2 \
+    $(LOCAL_PATH)/recovery/root/res/misc/umount:recovery/root/res/misc/umount \
+    $(LOCAL_PATH)/recovery/root/res/misc/umount.2:recovery/root/res/misc/umount.2 \
+    $(LOCAL_PATH)/recovery/root/res/misc/virtual_keys.2.png:recovery/root/res/misc/virtual_keys.2.png \
+    $(LOCAL_PATH)/recovery/root/sbin/aroma:recovery/root/sbin/aroma \
+    $(LOCAL_PATH)/recovery/root/sbin/bootmenu.sh:recovery/root/sbin/bootmenu.sh
 
 # Inputs
 PRODUCT_COPY_FILES += \
@@ -171,6 +186,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
+
+# F2FS filesystem
+PRODUCT_PACKAGES += \
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs \
+    f2fstat
 
 # Misc packages
 PRODUCT_PACKAGES += \

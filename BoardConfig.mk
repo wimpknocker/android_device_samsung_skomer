@@ -49,10 +49,18 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# exFAT kernel support
+KERNEL_EXFAT_MODULE_NAME := "exfat"
+
+# F2FS filesystem
+TARGET_USERIMAGES_USE_F2FS := true
+
+# Ramdisk
+TARGET_PROVIDES_ENVIRON_RC := true
+
 # Kernel
-TARGET_KERNEL_CONFIG := skomer_defconfig
+TARGET_KERNEL_CONFIG := blackhawk_skomer_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/skomer
-TARGET_USE_ST_ERICSSON_KERNEL := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_RECOVERY_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -100,7 +108,7 @@ ENABLE_WEBGL := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
+COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB -DMR1_AUDIO_BLOB
 BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
 
 # Misc
@@ -120,6 +128,7 @@ BOARD_LPM_BOOT_ARGUMENT_VALUE := 1
 BOARD_UMS_LUNFILE := "/sys/devices/platform/musb-ux500.0/musb-hdrc/gadget/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/musb-ux500.0/musb-hdrc/gadget/lun%d/file"
 TARGET_RECOVERY_FSTAB := device/samsung/skomer/rootdir/fstab.samsungskomer
+TARGET_RECOVERY_INITRC := device/samsung/skomer/recovery/root/init.rc
 RECOVERY_FSTAB_VERSION := 2
 BOARD_RECOVERY_SWIPE := true
 BOARD_HAS_NO_MISC_PARTITION := true
