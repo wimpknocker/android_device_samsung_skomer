@@ -65,6 +65,7 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_RECOVERY_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := "androidboot.selinux=permissive"
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/golden/shbootimg.mk
 
 # Graphics
 USE_OPENGL_RENDERER := true
