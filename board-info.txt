@@ -1,0 +1,1 @@
+require version-baseband=S7710:XXAMB6

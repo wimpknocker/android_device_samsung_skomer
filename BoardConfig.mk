@@ -18,6 +18,9 @@
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/skomer/include
 TARGET_OTA_ASSERT_DEVICE := skomer,s7710,GT-S7710
 
+# Assert minimum baseband version
+TARGET_BOARD_INFO_FILE ?= device/samsung/skomer/board-info.txt
+
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := DB8520H
 TARGET_NO_BOOTLOADER := true
