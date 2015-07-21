@@ -49,7 +49,7 @@ PRODUCT_PACKAGES += \
     genfstab
 
 # Prebuilt kernel
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     device/samsung/skomer/ramdisk/zImage:kernel
 
 # Initial ramdisk
