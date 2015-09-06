@@ -17,5 +17,6 @@ on boot
 ##
 service ueventd /sbin/ueventd
     critical
+    disabled # by Mer
 
 service battery_charger /charger
