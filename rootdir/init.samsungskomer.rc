@@ -52,7 +52,8 @@ on init
     chmod 0644 /proc/cmdline
 
 on fs
-    mount_all /fstab.samsungskomer
+    # Let systemd handle mounts
+    #mount_all /fstab.samsungskomer
     setprop ro.crypto.fuse_sdcard true
     start cspsa
 
